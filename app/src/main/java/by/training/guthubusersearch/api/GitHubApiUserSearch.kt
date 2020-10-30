@@ -12,12 +12,8 @@ private const val BASE_URL = "https://api.github.com"
 
 interface GitHubApiUserSearch {
 
-    @GET("search/user")
-    fun search(
-        @Query("q") query: String,
-        @Query("page") page: Int,
-        @Query("per_page") per_page: Int
-    ): Observable<Result>
+    @GET("search/users")
+    fun search(@Query("q") query: String): Observable<Result>
 
     companion object ApiFactory {
 
