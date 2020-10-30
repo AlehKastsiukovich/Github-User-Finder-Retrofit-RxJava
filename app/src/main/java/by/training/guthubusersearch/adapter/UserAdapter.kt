@@ -23,4 +23,9 @@ class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
     override fun getItemCount(): Int {
         return userList.size
     }
+
+    fun update(users: List<User>) {
+        userList = users.toMutableList()
+        notifyDataSetChanged()
+    }
 }
