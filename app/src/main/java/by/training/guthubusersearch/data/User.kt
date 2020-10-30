@@ -12,3 +12,5 @@ data class User(
     val type: String,
     val score: Int
 )
+
+data class Result(val total_count: Int, val incomplete_results: Boolean, val items: List<User>)
