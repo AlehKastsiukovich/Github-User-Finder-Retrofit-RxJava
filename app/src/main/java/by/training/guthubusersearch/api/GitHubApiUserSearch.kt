@@ -1,5 +1,7 @@
 package by.training.guthubusersearch.api
 
+import by.training.guthubusersearch.data.Result
+import io.reactivex.Observable
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,7 +17,7 @@ interface GitHubApiUserSearch {
         @Query("q") query: String,
         @Query("page") page: Int,
         @Query("per_page") per_page: Int
-    )
+    ): Observable<Result>
 
     companion object ApiFactory {
 
