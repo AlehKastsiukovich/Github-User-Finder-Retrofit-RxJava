@@ -13,10 +13,13 @@ private const val BASE_URL = "https://api.github.com"
 interface GitHubApiUserSearch {
 
     @GET("search/users")
-    fun search(@Query("q") query: String): Observable<Result>
+    fun search(
+        @Query("q") query: String,
+        @Query("page") page: Int,
+        @Query("per_page") per_page: Int
+    ): Observable<Result>
 
     companion object ApiFactory {
-
         fun createApi(): GitHubApiUserSearch {
             return Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

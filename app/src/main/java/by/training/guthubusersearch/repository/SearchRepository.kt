@@ -4,8 +4,12 @@ import by.training.guthubusersearch.api.GitHubApiUserSearch
 import by.training.guthubusersearch.data.Result
 import io.reactivex.Observable
 
-class SearchRepository(private val api: GitHubApiUserSearch) {
-    fun searchUsers(location: String, language: String): Observable<Result> {
-        return api.search(location)
+object SearchRepository {
+
+    private val api = GitHubApiUserSearch.createApi()
+    private var currentPage: Int = 1
+
+    fun searchUsers(location: String): Observable<Result> {
+        return api.search(location, currentPage++, 6)
     }
 }
