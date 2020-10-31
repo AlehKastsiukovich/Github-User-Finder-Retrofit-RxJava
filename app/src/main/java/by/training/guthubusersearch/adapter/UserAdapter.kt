@@ -28,4 +28,9 @@ class UserAdapter : RecyclerView.Adapter<UserViewHolder>() {
         userList.addAll(users)
         notifyDataSetChanged()
     }
+
+    fun clear() {
+        userList.clear()
+        notifyDataSetChanged()
+    }
 }

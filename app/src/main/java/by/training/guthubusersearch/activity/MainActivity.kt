@@ -8,7 +8,9 @@ import by.training.guthubusersearch.R
 import by.training.guthubusersearch.adapter.CustomScrollListener
 import by.training.guthubusersearch.adapter.UserAdapter
 import by.training.guthubusersearch.repository.SearchRepository
+import kotlinx.android.synthetic.main.activity_main.clearTextImageView
 import kotlinx.android.synthetic.main.activity_main.loadDataButton
+import kotlinx.android.synthetic.main.activity_main.locationEditText
 import kotlinx.android.synthetic.main.activity_main.recyclerView
 
 class MainActivity : AppCompatActivity() {
@@ -21,16 +23,32 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         userAdapter = UserAdapter()
-        scrollListener = CustomScrollListener(userAdapter)
 
         recyclerView.apply {
             adapter = userAdapter
             layoutManager = LinearLayoutManager(this@MainActivity)
-            addOnScrollListener(scrollListener)
+        }
 
-            loadDataButton.setOnClickListener {
-                SearchRepository.loadData(userAdapter)
-            }
+        initButtonLogic()
+        initListClearOption()
+    }
+
+    private fun initButtonLogic() {
+        loadDataButton.setOnClickListener {
+            initScrollListener()
+            SearchRepository.searchUsers(userAdapter, locationEditText.text.toString())
+        }
+    }
+
+    private fun initScrollListener() {
+        scrollListener = CustomScrollListener(userAdapter, locationEditText.text.toString())
+        recyclerView.addOnScrollListener(scrollListener)
+    }
+
+    private fun initListClearOption() {
+        clearTextImageView.setOnClickListener {
+            locationEditText.setText("")
+            userAdapter.clear()
         }
     }
 }
